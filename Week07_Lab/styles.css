@@ -1,20 +1,153 @@
-body { font-family: Arial; background:#f2f2f2; padding:30px; }
-.container { max-width:450px; margin:auto; background:#fff; padding:25px 30px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
-h2 { text-align:center; margin-bottom:25px; }
-label { display:block; margin-top:20px; font-weight:500; }
-input[type=text], input[type=email], input[type=tel], input[type=password] { width:100%; padding:10px; margin-top:5px; box-sizing:border-box; border:1px solid #ccc; border-radius:5px; }
+:root{
+  --gap:12px;
+  --color-weak:#e74c3c;
+  --color-medium:#f1c40f;
+  --color-strong:#2ecc71;
+  --muted:#6b6b6b;
+}
 
-button { margin-top:20px; padding:12px; width:48%; margin-right:2%; cursor:pointer; border:none; border-radius:5px; background:#007bff; color:#fff; font-weight:bold; transition:0.3s; }
-button:hover:not(:disabled) { background:#0056b3; }
-button:disabled { background:#ccc; cursor:not-allowed; }
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans CJK TC", "Helvetica Neue", Arial;
+  padding:24px;
+  background:#f7f7f7;
+}
 
-.error-message { color:red; font-size:0.85em; margin:5px 0 0 0; }
-.success-message { color:green; font-size:1em; margin-top:15px; text-align:center; }
+form{
+  max-width:900px;
+  margin:0 auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+}
 
-.strength-container { display:flex; align-items:center; margin-top:5px; }
-.strength-bar { flex:1; height:15px; background:#ddd; border-radius:6px; position:relative; }
-#strengthIndicator { height:100%; width:0%; border-radius:6px; transition: width 0.3s, background 0.3s; }
-#strengthText { margin-left:10px; font-weight:bold; min-width:40px; }
+h2{ margin-top:0; }
 
-#interestsContainer label { display:inline-block; padding:5px 10px; margin:5px 5px 0 0; border-radius:4px; border:1px solid #ccc; cursor:pointer; transition:0.3s; }
-#interestsContainer label.checked { background:#cce5ff; border-color:#007bff; }
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr); /* 左右平衡 */
+  gap: var(--gap);
+  align-items:start;
+}
+
+/* 個別欄位 */
+.field{
+  display:flex;
+  flex-direction:column;
+}
+
+.label-inline{ display:flex; align-items:center; gap:8px; }
+
+.field label{
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="password"],
+.field input[type="tel"]{
+  padding:8px 10px;
+  border:1px solid #d0d0d0;
+  border-radius:6px;
+  font-size:14px;
+}
+
+.inline{ display:flex; gap:8px; align-items:center; }
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.tags label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 8px;
+  border-radius:18px;
+  background:#f0f0f0;
+  cursor:pointer;
+  user-select:none;
+  border:1px solid transparent;
+}
+
+.tags label.selected{
+  background:#e8f6ff;
+  border-color:#7fbfff;
+}
+
+.password-strength{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+}
+
+.password-strength .bar{
+  flex:1;
+  height:8px;
+  border-radius:6px;
+  background:linear-gradient(90deg,#eee,#eee);
+  transition:background 200ms ease, width 200ms ease;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,0.03);
+}
+
+.password-strength .bar.weak{ background: linear-gradient(90deg, var(--color-weak), #ffb6a6); }
+.password-strength .bar.medium{ background: linear-gradient(90deg, var(--color-medium), #f9e79f); }
+.password-strength .bar.strong{ background: linear-gradient(90deg, var(--color-strong), #baf3c9); }
+
+.strength-text{ font-size:13px; color:var(--muted); min-width:78px; }
+
+/* 錯誤訊息 */
+.error{
+  color:var(--color-weak);
+  margin:6px 0 0 0;
+  font-size:13px;
+  min-height:18px;
+}
+
+/* 按鈕 */
+.actions{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+button{
+  padding:8px 14px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  background:#fff;
+  cursor:pointer;
+}
+
+#submitBtn:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
+button.loading{
+  position:relative;
+  color:transparent;
+}
+button.loading::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:16px;
+  height:16px;
+  transform:translate(-50%,-50%);
+  border:2px solid #999;
+  border-top-color:transparent;
+  border-radius:50%;
+  animation:spin 0.9s linear infinite;
+}
+
+@keyframes spin{ to{ transform:translate(-50%,-50%) rotate(360deg); } }
+
+@media (max-width:720px){
+  .form-grid{ grid-template-columns: 1fr; }
+}
