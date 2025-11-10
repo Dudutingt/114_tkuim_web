@@ -32,16 +32,4 @@
 ---
 
 ## 🌐 GitHub Pages 網址
-🔗 [點此開啟專案頁面](https://github.com/leo-412630336/114_web_midterm_project)
-
----
-
-## 🖼️ 系統畫面預覽
-> 使用者介面簡潔，能即時顯示輸入的用電資料與計算結果。
-
-![系統介面預覽]([screenshot.png](https://leo-412630336.github.io/114_web_midterm_project/))
-
----
-
-## 📄 授權
-本專案僅供學習及教學用途。
+🔗 [點此開啟專案頁面](https://leo-412630336.github.io/114_web_midterm_project/)
