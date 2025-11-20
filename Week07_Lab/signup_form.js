@@ -30,77 +30,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'signup-draft';
 
   function setFieldError(el, errEl, message) {
-    try { el.setCustomValidity(message || ''); } catch (e) { /* some elements may not support */ }
+    try { el.setCustomValidity(message || ''); } catch (e) {}
     errEl.textContent = message || '';
   }
+
   function validateName() {
     const v = fields.name.value.trim();
-    if (!v) {
-      setFieldError(fields.name, errs.name, '請輸入姓名');
-      return false;
-    }
-    setFieldError(fields.name, errs.name, '');
-    return true;
+    if (!v) { setFieldError(fields.name, errs.name, '請輸入姓名'); return false; }
+    setFieldError(fields.name, errs.name, ''); return true;
   }
 
   function validateEmail() {
     const v = fields.email.value.trim();
-    if (!v) {
-      setFieldError(fields.email, errs.email, '請輸入 Email');
-      return false;
-    }
+    if (!v) { setFieldError(fields.email, errs.email, '請輸入 Email'); return false; }
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    if (!ok) {
-      setFieldError(fields.email, errs.email, 'Email 格式錯誤');
-      return false;
-    }
-    setFieldError(fields.email, errs.email, '');
-    return true;
+    if (!ok) { setFieldError(fields.email, errs.email, 'Email 格式錯誤'); return false; }
+    setFieldError(fields.email, errs.email, ''); return true;
   }
 
   function validatePhone() {
     const v = fields.phone.value.replace(/\D/g, '');
-    if (!v) {
-      setFieldError(fields.phone, errs.phone, '請輸入手機號碼');
-      return false;
-    }
-    if (!/^\d{10}$/.test(v)) {
-      setFieldError(fields.phone, errs.phone, '手機需為 10 碼數字');
-      return false;
-    }
-    setFieldError(fields.phone, errs.phone, '');
-    return true;
+    if (!v) { setFieldError(fields.phone, errs.phone, '請輸入手機號碼'); return false; }
+    if (!/^\d{10}$/.test(v)) { setFieldError(fields.phone, errs.phone, '手機需為 10 碼數字'); return false; }
+    setFieldError(fields.phone, errs.phone, ''); return true;
   }
 
   function validatePassword() {
     const v = fields.password.value;
-    if (!v) {
-      setFieldError(fields.password, errs.password, '請輸入密碼');
-      updateStrength('');
-      return false;
-    }
-    if (v.length < 8) {
-      setFieldError(fields.password, errs.password, '密碼至少 8 碼');
-      updateStrength(v);
-      return false;
-    }
-    if (!(/[A-Za-z]/.test(v) && /\d/.test(v))) {
-      setFieldError(fields.password, errs.password, '密碼需英數混合');
-      updateStrength(v);
-      return false;
-    }
-    setFieldError(fields.password, errs.password, '');
-    updateStrength(v);
-    return true;
+    if (!v) { setFieldError(fields.password, errs.password, '請輸入密碼'); updateStrength(''); return false; }
+    if (v.length < 8) { setFieldError(fields.password, errs.password, '密碼至少 8 碼'); updateStrength(v); return false; }
+    if (!(/[A-Za-z]/.test(v) && /\d/.test(v))) { setFieldError(fields.password, errs.password, '密碼需英數混合'); updateStrength(v); return false; }
+    setFieldError(fields.password, errs.password, ''); updateStrength(v); return true;
   }
 
   function validateConfirm() {
-    if (fields.confirm.value !== fields.password.value) {
-      setFieldError(fields.confirm, errs.confirm, '兩次密碼不一致');
-      return false;
-    }
-    setFieldError(fields.confirm, errs.confirm, '');
-    return true;
+    if (fields.confirm.value !== fields.password.value) { setFieldError(fields.confirm, errs.confirm, '兩次密碼不一致'); return false; }
+    setFieldError(fields.confirm, errs.confirm, ''); return true;
   }
 
   function validateInterests() {
@@ -108,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const checked = inputs.filter(i => i.checked).length;
     const firstInput = inputs[0] || null;
     if (checked < 1) {
-      // set custom validity on a checkbox input so constraint validation can pick it up
       if (firstInput) firstInput.setCustomValidity('請至少選一個興趣');
       errs.interests.textContent = '請至少選一個興趣';
       return false;
@@ -119,12 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function validateTerms() {
-    if (!fields.terms.checked) {
-      setFieldError(fields.terms, errs.terms, '請同意服務條款');
-      return false;
-    }
-    setFieldError(fields.terms, errs.terms, '');
-    return true;
+    if (!fields.terms.checked) { setFieldError(fields.terms, errs.terms, '請同意服務條款'); return false; }
+    setFieldError(fields.terms, errs.terms, ''); return true;
   }
 
   function scorePassword(pw) {
@@ -144,108 +104,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const pw = (typeof value === 'string') ? value : fields.password.value;
     const s = pw ? scorePassword(pw) : 0;
     strengthBar.classList.remove('weak', 'medium', 'strong');
-    if (s === 0) {
-      strengthBar.style.width = '0%';
-      strengthText.textContent = '強度：';
-      strengthText.style.color = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim();
-      return;
-    }
-    if (s === 1) {
-      strengthBar.classList.add('weak');
-      strengthBar.style.width = '33%';
-      strengthText.textContent = '強度：弱';
-      strengthText.style.color = getComputedStyle(document.documentElement).getPropertyValue('--color-weak').trim();
-    } else if (s === 2) {
-      strengthBar.classList.add('medium');
-      strengthBar.style.width = '66%';
-      strengthText.textContent = '強度：中';
-      strengthText.style.color = getComputedStyle(document.documentElement).getPropertyValue('--color-medium').trim();
-    } else {
-      strengthBar.classList.add('strong');
-      strengthBar.style.width = '100%';
-      strengthText.textContent = '強度：強';
-      strengthText.style.color = getComputedStyle(document.documentElement).getPropertyValue('--color-strong').trim();
-    }
+    if (s === 0) { strengthBar.style.width='0%'; strengthText.textContent='強度：'; return; }
+    if (s === 1) { strengthBar.classList.add('weak'); strengthBar.style.width='33%'; strengthText.textContent='強度：弱'; }
+    else if (s===2){ strengthBar.classList.add('medium'); strengthBar.style.width='66%'; strengthText.textContent='強度：中'; }
+    else { strengthBar.classList.add('strong'); strengthBar.style.width='100%'; strengthText.textContent='強度：強'; }
   }
 
+  // 綁定事件
   fields.name.addEventListener('blur', validateName);
   fields.name.addEventListener('input', () => { validateName(); saveDraft(); });
-
   fields.email.addEventListener('blur', validateEmail);
   fields.email.addEventListener('input', () => { validateEmail(); saveDraft(); });
-
   fields.phone.addEventListener('blur', validatePhone);
   fields.phone.addEventListener('input', () => { validatePhone(); saveDraft(); });
-
   fields.password.addEventListener('blur', validatePassword);
   fields.password.addEventListener('input', () => { validatePassword(); validateConfirm(); saveDraft(); });
-
   fields.confirm.addEventListener('blur', validateConfirm);
   fields.confirm.addEventListener('input', () => { validateConfirm(); saveDraft(); });
-
   fields.terms.addEventListener('change', () => { validateTerms(); saveDraft(); });
 
-  fields.interestsBlock.addEventListener('change', (e) => {
-    if (e.target && e.target.name === 'interests') {
-      Array.from(fields.interestsBlock.querySelectorAll('label')).forEach(lbl => {
+  fields.interestsBlock.addEventListener('change', (e)=>{
+    if(e.target && e.target.name==='interests'){
+      Array.from(fields.interestsBlock.querySelectorAll('label')).forEach(lbl=>{
         const input = lbl.querySelector('input');
-        if (input && input.checked) lbl.classList.add('selected'); else lbl.classList.remove('selected');
+        if(input && input.checked) lbl.classList.add('selected'); else lbl.classList.remove('selected');
       });
       validateInterests();
       saveDraft();
     }
   });
 
-  form.addEventListener('submit', (ev) => {
-    ev.preventDefault();
-    msg.textContent = '';
-    const validators = [validateName, validateEmail, validatePhone, validatePassword, validateConfirm, validateInterests, validateTerms];
-    let firstInvalid = null;
-    for (const fn of validators) {
-      const ok = fn();
-      if (!ok && !firstInvalid) {
-        if (fn === validateInterests) {
-          firstInvalid = fields.interestsBlock.querySelector('input[name="interests"]');
-        } else {
-          const key = fn.name.replace('validate', '').toLowerCase();
-          firstInvalid = fields[key] || firstInvalid;
-        }
-      }
-    }
-    if (firstInvalid) {
-      try { firstInvalid.focus(); } catch (e) {}
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.classList.add('loading');
-    setTimeout(() => {
-      submitBtn.classList.remove('loading');
-      submitBtn.disabled = false;
-      msg.textContent = '註冊成功！';
-      form.reset();
-      updateStrength('');
-      Array.from(fields.interestsBlock.querySelectorAll('label')).forEach(lbl => lbl.classList.remove('selected'));
-      clearDraft();
-      fields.name.focus();
-      setTimeout(() => { if (msg.textContent === '註冊成功！') msg.textContent = ''; }, 3000);
-    }, 1000);
-  });
-
-  resetBtn.addEventListener('click', () => {
-    form.reset();
-    Object.values(errs).forEach(e => e.textContent = '');
-    updateStrength('');
-    Array.from(fields.interestsBlock.querySelectorAll('label')).forEach(lbl => lbl.classList.remove('selected'));
-    Array.from(fields.interestsBlock.querySelectorAll('input[name="interests"]')).forEach(i => i.setCustomValidity(''));
-    clearDraft();
-
-    msg.textContent = '表單已重設';
-    try { fields.name.focus(); } catch (e) {}
-    setTimeout(() => {
-      if (msg.textContent === '表單已重設') msg.textContent = '';
-    }, 3000);
-  });
+  // restore draft
+  function restoreDraft(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return;
+      const d = JSON.parse(raw);
+      if(!d) return;
+      fields.name.value=d.name||'';
+      fields.email.value=d.email||'';
+      fields.phone.value=d.phone||'';
+      fields.password.value=d.password||'';
+      fields.confirm.value=d.confirm||'';
+      fields.terms.checked=!!d.terms;
+      Array.from(fields.interestsBlock.querySelectorAll('input[name="interests"]')).forEach(inp=>{
+        inp.checked=(d.interests||[]).includes(inp.value);
+        if(inp.checked) inp.parentElement.classList.add('selected'); else inp.parentElement.classList.remove('selected');
+      });
+      updateStrength(fields.password.value);
+    }catch(e){}
+  }
 
   function saveDraft() {
     const data = {
@@ -255,34 +163,84 @@ document.addEventListener('DOMContentLoaded', () => {
       password: fields.password.value,
       confirm: fields.confirm.value,
       terms: fields.terms.checked,
-      interests: Array.from(fields.interestsBlock.querySelectorAll('input[name="interests"]:checked')).map(i => i.value),
+      interests: Array.from(fields.interestsBlock.querySelectorAll('input[name="interests"]:checked')).map(i=>i.value),
     };
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) {}
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){}
   }
 
-  function clearDraft() {
-    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
-  }
-
-  function restoreDraft() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const d = JSON.parse(raw);
-      if (!d) return;
-      fields.name.value = d.name || '';
-      fields.email.value = d.email || '';
-      fields.phone.value = d.phone || '';
-      fields.password.value = d.password || '';
-      fields.confirm.value = d.confirm || '';
-      fields.terms.checked = !!d.terms;
-      Array.from(fields.interestsBlock.querySelectorAll('input[name="interests"]')).forEach(inp => {
-        inp.checked = (d.interests || []).includes(inp.value);
-        if (inp.checked) inp.parentElement.classList.add('selected'); else inp.parentElement.classList.remove('selected');
-      });
-      updateStrength(fields.password.value);
-    } catch (e) { /* ignore */ }
-  }
+  function clearDraft(){ try{ localStorage.removeItem(STORAGE_KEY); }catch(e){} }
 
   restoreDraft();
+
+  // submit 表單
+  form.addEventListener('submit', async (ev)=>{
+    ev.preventDefault();
+    msg.textContent='';
+
+    const validators = [validateName, validateEmail, validatePhone, validatePassword, validateConfirm, validateInterests, validateTerms];
+    let firstInvalid = null;
+    for(const fn of validators){
+      const ok = fn();
+      if(!ok && !firstInvalid){
+        if(fn===validateInterests) firstInvalid = fields.interestsBlock.querySelector('input[name="interests"]');
+        else { const key = fn.name.replace('validate','').toLowerCase(); firstInvalid = fields[key]||firstInvalid; }
+      }
+    }
+    if(firstInvalid){ try{ firstInvalid.focus(); }catch(e){}; return; }
+
+    const payload = {
+      name: fields.name.value,
+      email: fields.email.value,
+      phone: fields.phone.value,
+      password: fields.password.value,
+      terms: fields.terms.checked,
+      interests: Array.from(fields.interestsBlock.querySelectorAll('input[name="interests"]:checked')).map(i=>i.value),
+    };
+
+    async function submitSignup(data){
+      const response = await fetch('http://localhost:3001/api/signup', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+      });
+      if(!response.ok){
+        const payload = await response.json();
+        throw new Error(payload.error||'報名失敗');
+      }
+      return response.json();
+    }
+
+    try{
+      submitBtn.disabled=true;
+      submitBtn.classList.add('loading');
+      submitBtn.textContent='送出中...';
+      const result = await submitSignup(payload);
+      toast.show(`✅ ${result.message||'註冊成功！'}`);
+      form.reset();
+      updateStrength('');
+      Array.from(fields.interestsBlock.querySelectorAll('label')).forEach(lbl=>lbl.classList.remove('selected'));
+      clearDraft();
+      fields.name.focus();
+    }catch(err){
+      toast.show(`❌ ${err.message}`);
+    }finally{
+      submitBtn.disabled=false;
+      submitBtn.classList.remove('loading');
+      submitBtn.textContent='送出';
+    }
+  });
+
+  // reset 按鈕
+  resetBtn.addEventListener('click', ()=>{
+    form.reset();
+    Object.values(errs).forEach(e=>e.textContent='');
+    updateStrength('');
+    Array.from(fields.interestsBlock.querySelectorAll('label')).forEach(lbl=>lbl.classList.remove('selected'));
+    Array.from(fields.interestsBlock.querySelectorAll('input[name="interests"]')).forEach(i=>i.setCustomValidity(''));
+    clearDraft();
+    msg.textContent='表單已重設';
+    try{ fields.name.focus(); }catch(e){}
+    setTimeout(()=>{ if(msg.textContent==='表單已重設') msg.textContent=''; },3000);
+  });
+
 });
