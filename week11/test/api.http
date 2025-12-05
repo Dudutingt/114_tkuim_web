@@ -12,7 +12,7 @@ Content-Type: application/json
 GET http://localhost:3001/api/signup
 
 
-PATCH http://localhost:3001/api/signup/69327991cb2e42fa806e0728
+PATCH http://localhost:3001/api/signup/69327fa391081ce7fbf14ca0
 Content-Type: application/json
 
 {
@@ -20,5 +20,5 @@ Content-Type: application/json
 }
 
 
-DELETE http://localhost:3001/api/signup/69327991cb2e42fa806e0728
+DELETE http://localhost:3001/api/signup/69327fa391081ce7fbf14ca0
 
