@@ -29,7 +29,7 @@ npm install
 1.5 啟動後端 API
 npm run dev
 
-2. 環境需求
+<h1>2. 環境需求</h1>
 項目	說明
 Node.js	建議 v18+
 Docker Desktop	用於建立 MongoDB
@@ -52,7 +52,7 @@ MONGO_URI	連線至 MongoDB 的完整 URI
 MONGO_DB	你所使用的資料庫名稱
 PORT	API 運行的 port
 
-3. 測試方式
+<h1>3. 測試方式</h1>
 
 
  3.1 REST Client（VSCode）範例
@@ -141,7 +141,7 @@ db.participants.find().pretty()
 建立 email 唯一索引
 db.participants.createIndex({ email: 1 }, { unique: true })
 
-# 測試重複 email
+測試重複 email
 db.participants.insertOne({
   name: "測試",
   email: "duplicate@example.com",
@@ -156,7 +156,7 @@ API 會回傳：
   "message": "此 Email 已被使用，請使用其他 Email 報名。"
 }
 
-4. 常見問題（FAQ）
+<h1>4. 常見問題（FAQ）</h1>
 1. 出現 Authentication failed？
 
 原因：你輸入的 Mongo 使用者／密碼錯誤。
