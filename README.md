@@ -172,7 +172,7 @@ MONGO_URI=mongodb://root:example@localhost:27017
 
 2. POST 報錯：email 重複？
 
-你傳了這種：
+傳了這種：
 
 { 
   "name": "小明",
@@ -183,8 +183,8 @@ MONGO_URI=mongodb://root:example@localhost:27017
 
 錯誤：
 
-✔ email 前後多空格
-✔ phone key 用「電話」不是「phone」
+email 前後多空格
+phone key 用「電話」不是「phone」
 
 正確：
 
@@ -196,7 +196,7 @@ MONGO_URI=mongodb://root:example@localhost:27017
 
 3. API 連不上 Mongo？
 
-請驗證：
+驗證：
 
 docker ps
 
