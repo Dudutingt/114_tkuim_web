@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Models Supported by Ultralytics - Ultralytics YOLO Docs</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <a href="#" class="logo">
+                    <img src="https://assets.ultralytics.com/img/ultralytics-logo.png" alt="Ultralytics" style="height: 28px; vertical-align: middle; margin-right: 8px;">
+                    <!-- Fallback if image doesn't load handled by alt, or use text/icon combo -->
+                </a>
+                <nav class="main-nav">
+                    <a href="#">Home</a>
+                    <a href="#">Quickstart</a>
+                    <a href="#">Modes</a>
+                    <a href="#">Tasks</a>
+                    <a href="#" class="active">Models</a>
+                    <a href="#">Datasets</a>
+                    <a href="#">Solutions</a>
+                    <a href="#">Guides</a>
+                    <a href="#">Integrations</a>
+                    <a href="#">HUB</a>
+                </nav>
+            </div>
+            <div class="tools-area">
+                <button class="icon-btn theme-toggle"><i class="fa-solid fa-moon"></i></button>
+                <button class="icon-btn lang-toggle"><i class="fa-solid fa-language"></i></button>
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <span>Search</span>
+                    <span class="shortcut">⌘K</span>
+                </div>
+                <a href="#" class="github-link"><i class="fa-brands fa-github"></i> <span>ultralytics/ultralytics</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="layout-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#">YOLOv3</a></li>
+                    <li><a href="#">YOLOv4</a></li>
+                    <li><a href="#">YOLOv5</a></li>
+                    <li><a href="#">YOLOv6</a></li>
+                    <li><a href="#">YOLOv7</a></li>
+                    <li><a href="#">YOLOv8</a></li>
+                    <li><a href="#">YOLOv9</a></li>
+                    <li><a href="#">YOLOv10</a></li>
+                    <li><a href="#">YOLO11</a></li>
+                    <li><a href="#">YOLO12</a></li>
+                    <li><a href="#" class="coming-soon">YOLO26 <span class="rocket">🚀</span> Coming soon</a></li>
+                    <li><a href="#">SAM (Segment Anything Model)</a></li>
+                    <li><a href="#">SAM 2 (Segment Anything Model 2)</a></li>
+                    <li><a href="#">SAM 3 (Segment Anything Model 3)</a></li>
+                    <li><a href="#">MobileSAM (Mobile Segment Anything Model)</a></li>
+                    <li><a href="#">FastSAM (Fast Segment Anything Model)</a></li>
+                    <li><a href="#">YOLO-World</a></li>
+                    <li><a href="#">RT-DETR</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">Docs / Models / Supported</div>
+            <h1>Models Supported by Ultralytics</h1>
+            
+            <div class="content-body">
+                <p>Welcome to Ultralytics' model documentation! We offer support for a wide range of models, each tailored to specific tasks like <a href="#">object detection</a>, <a href="#">instance segmentation</a>, <a href="#">image classification</a>, <a href="#">pose estimation</a>, and <a href="#">multi-object tracking</a>. If you're interested in contributing your model architecture to Ultralytics, check out our <a href="#">Contributing Guide</a>.</p>
+
+                <!-- Chart Placeholder -->
+                <div class="chart-container">
+                    <div class="chart-mockup">
+                        <!-- Simple SVG or CSS representation of the chart in the screenshot -->
+                        <div class="chart-title">YOLO Performance Comparison (COCO mAP vs Latency)</div>
+                        <div class="chart-visual">
+                            <!-- Abstract curves -->
+                            <svg viewBox="0 0 600 300" class="performance-chart">
+                                <path d="M50,250 C150,200 300,100 550,50" style="stroke: #2563eb; stroke-width: 3; fill: none;"></path>
+                                <path d="M50,260 C150,220 300,150 500,100" style="stroke: #fbbf24; stroke-width: 2; fill: none; stroke-dasharray: 4;"></path>
+                                <path d="M50,270 C120,240 250,180 450,150" style="stroke: #10b981; stroke-width: 2; fill: none; stroke-dasharray: 4;"></path>
+                                <!-- Axes -->
+                                <line x1="40" y1="280" x2="580" y2="280" style="stroke: #cbd5e1; stroke-width: 2;"></line>
+                                <line x1="40" y1="280" x2="40" y2="20" style="stroke: #cbd5e1; stroke-width: 2;"></line>
+                                <text x="300" y="295" text-anchor="middle" font-size="12" fill="#64748b">Latency T4 TensorRT10 FP16 (ms/img)</text>
+                                <text x="20" y="150" transform="rotate(-90 20,150)" text-anchor="middle" font-size="12" fill="#64748b">COCO mAP</text>
+                                <!-- Labels -->
+                                <text x="550" y="45" fill="#2563eb" font-weight="bold">YOLO11</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="models-list">
+                    <ol>
+                        <li><strong>YOLOv3</strong>: The third iteration of the YOLO algorithm released by Joseph Redmon in 2018.</li>
+                        <li><strong>YOLOv4</strong>: A darknet-native update to YOLOv3, released by Alexey Bochkovskiy in 2020.</li>
+                        <li><strong>YOLOv5</strong>: An improved version of the YOLO architecture by Ultralytics, offering better performance and speed trade-offs compared to previous versions.</li>
+                        <li><strong>YOLOv6</strong>: Released by Meituan in 2022, and in use in many of the company's autonomous delivery robots.</li>
+                        <li><strong>YOLOv7</strong>: Updated YOLO models released in 2022 by the authors of YOLOv4. Only inference is supported.</li>
+                        <li><strong>YOLOv8</strong>: A versatile model featuring enhanced capabilities such as <a href="#">instance segmentation</a>, pose/keypoints estimation, and classification.</li>
+                        <li><strong>YOLOv9</strong>: An experimental model trained on the Ultralytics YOLOv5 codebase implementing Programmable Gradient Information (PGI).</li>
+                        <li><strong>YOLOv10</strong>: By Tsinghua University, featuring NMS-free training and efficiency-accuracy driven architecture, delivering state-of-the-art performance and latency.</li>
+                        <li><strong>YOLO11</strong> 🚀: Ultralytics' latest YOLO models delivering state-of-the-art (SOTA) performance across multiple tasks including detection, segmentation, pose estimation, tracking, and classification.</li>
+                        <li><strong>YOLO26</strong> ⚠️ <strong>Coming Soon</strong>: Ultralytics' next-generation YOLO model optimized for edge deployment with end-to-end NMS-free inference.</li>
+                    </ol>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar (TOC) -->
+        <aside class="sidebar-right">
+            <div class="toc-container">
+                <h3>On this page</h3>
+                <ul>
+                    <li><a href="#" class="active">Featured Models</a></li>
+                    <li><a href="#">Getting Started: Usage Examples</a></li>
+                    <li><a href="#">Contributing New Models</a></li>
+                    <li>
+                        <a href="#">FAQ</a>
+                        <ul>
+                            <li><a href="#">What are the key advantages of using Ultralytics YOLO11?</a></li>
+                            <li><a href="#">How can I train a YOLO model on custom data?</a></li>
+                            <li><a href="#">Which YOLO versions are supported?</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="ask-ai-fab" id="askAiBtn">
+        <span class="icon">🔵</span> Ask AI
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
