@@ -1,0 +1,24 @@
+
+POST http://localhost:3001/api/signup
+Content-Type: application/json
+
+{
+  "name": "新同學",
+  "email": "new@example.com",
+  "phone": "0911222333"
+}
+
+
+GET http://localhost:3001/api/signup
+
+
+PATCH http://localhost:3001/api/signup/69327fa391081ce7fbf14ca0
+Content-Type: application/json
+
+{
+  "phone": "0911000111"
+}
+
+
+DELETE http://localhost:3001/api/signup/69327fa391081ce7fbf14ca0
+
