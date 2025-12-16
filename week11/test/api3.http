@@ -1,4 +1,4 @@
-### 第一次（應該成功）
+### 第一次
 POST http://localhost:3001/api/signup
 Content-Type: application/json
 
