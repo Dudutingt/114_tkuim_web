@@ -1,21 +1,26 @@
 {
-  "name": "114_tkuim_web",
+  "name": "week12-server",
   "version": "1.0.0",
-  "description": "資管3C網路程式設計",
-  "main": "index.js",
+  "description": "Week12 TKUIM Web Server",
+  "type": "module",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dudutingt/114_tkuim_web.git"
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "create-student": "node scripts/create_student.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Dudutingt/114_tkuim_web/issues"
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.6.2"
   },
-  "homepage": "https://github.com/Dudutingt/114_tkuim_web#readme"
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
