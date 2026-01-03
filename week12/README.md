@@ -1,5 +1,6 @@
 # Week12 
 412630997杜駿珽
+
 這個專案主要是在做 使用者登入、身分驗證，以及不同角色的權限控制。
 系統分成 一般學員（student） 跟 管理員（admin） 兩種帳號，不同身分可以做的事情不一樣。
 
@@ -140,22 +141,4 @@ Authorization: Bearer <token>
 	123456
 學生	student1@test.com
 	123456
-學生	student2@test.com
-	123456
-# 八、專案結構簡介
-week12/
-├─ server/
-│  ├─ app.js
-│  ├─ db.js
-│  ├─ routes/
-│  ├─ middleware/
-│  ├─ scripts/
-│  ├─ .env
-│  └─ package.json
-│
-├─ frontend/
-│  ├─ index.html
-│  ├─ app.js
-│  └─ style.css
-│
-└─ README.md
+
